@@ -16,14 +16,14 @@ import java.time.Duration;
 import java.util.List;
 
 public class CheckoutSteps {
-    @Given("the merchant generated a payment link")
-    public void theMerchantGeneratedAPaymentLink() {
+    @Given("a payment link was generated")
+    public void aPaymentLinkWasGenerated() {
         String paymentLink = CheckoutElements.paymentLink;
         //TODO Generate a dynamic link using API
     }
 
-    @And("the consumer accessed the payment link")
-    @When("the consumer accesses the payment link")
+    @And("the payment link was accessed")
+    @When("the payment link is accessed")
     public void theConsumerAccessesThePaymentLink() {
         Hooks.getWebdriver().get(CheckoutElements.paymentLink);
         WebDriverWait wait = new WebDriverWait(Hooks.getWebdriver(), Duration.ofSeconds(15));
@@ -55,27 +55,12 @@ public class CheckoutSteps {
         creditCardform.until(ExpectedConditions.visibilityOfElementLocated(CheckoutElements.creditCardNumberForm));
     }
 
-    @When("he adds a credit card information")
-    public void heAddsACardStatusCreditCardInformation() {
-        WebElement creditCardform = Hooks.getWebdriver().findElement(CheckoutElements.creditCardNumberForm);
-        WebElement creditCardName = Hooks.getWebdriver().findElement(CheckoutElements.cardName);
-        WebElement dueDate = Hooks.getWebdriver().findElement(CheckoutElements.dueCardDate);
+    @And("CVV card is displayed")
+    public void cvvCardIsDisplayed() {
         WebElement cardCvv = Hooks.getWebdriver().findElement(CheckoutElements.cardCvv);
 
-        creditCardform.click();
-        creditCardform.sendKeys("5155901222270002");
-        creditCardName.click();
-        creditCardName.sendKeys("John Smith");
-        dueDate.click();
-        dueDate.sendKeys("01/26");
         cardCvv.click();
         cardCvv.sendKeys("120");
-
-    }
-
-    @Then("the system should return {string}")
-    public void theSystemShouldReturnMessage(String returnMessage) {
-
     }
 
     @And("{string} installments were selected")
@@ -99,14 +84,69 @@ public class CheckoutSteps {
         }
     }
 
-    @And("termsOfUse was checked")
+    @And("terms Of Use was checked")
     public void termsofuseWasChecked() {
         WebElement checkboxTou = Hooks.getWebdriver().findElement(CheckoutElements.touCheckBox);
-        WebElement finishTransactionButton = Hooks.getWebdriver().findElement(CheckoutElements.finishPaymentButton);
         WebDriverWait wait = new WebDriverWait(Hooks.getWebdriver(), Duration.ofSeconds(15));
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(CheckoutElements.touCheckBox));
         checkboxTou.click();
+    }
+
+    @When("the transaction amount is displayed")
+    public void theTransactionAmountIsDisplayed() {
+        WebElement paymentAmount = Hooks.getWebdriver().findElement(CheckoutElements.paymentAmount);
+        Assert.assertTrue(paymentAmount.getText().contains("200,00"));
+    }
+
+    @And("the card number {string} is filled")
+    public void theCardNumberIsFilled(String cardNumber) {
+        WebElement creditCardForm = Hooks.getWebdriver().findElement(CheckoutElements.creditCardNumberForm);
+
+        creditCardForm.click();
+        creditCardForm.sendKeys(cardNumber);
+    }
+
+    @And("the card name {string} is filled")
+    public void theCardNameIsFilled(String cardName) {
+        WebElement creditCardName = Hooks.getWebdriver().findElement(CheckoutElements.cardName);
+
+        creditCardName.click();
+        creditCardName.sendKeys(cardName);
+    }
+
+    @And("the Due date is filled")
+    public void theDueDateIsFilled() {
+        WebElement dueDate = Hooks.getWebdriver().findElement(CheckoutElements.dueCardDate);
+
+        dueDate.click();
+        dueDate.sendKeys("01/26");
+    }
+
+    @And("the button to conclude payment was clicked")
+    public void theButtonToConcludePaymentWasClicked() {
+        WebElement finishTransactionButton = Hooks.getWebdriver().findElement(CheckoutElements.finishPaymentButton);
+
         finishTransactionButton.click();
+    }
+
+    @Then("the system should return {string}")
+    public void theSystemShouldReturnMessage(String returnMessage) throws InterruptedException {
+        WebElement paymentFinalStatus = Hooks.getWebdriver().findElement(CheckoutElements.paymentFinalStatus);
+        WebDriverWait wait = new WebDriverWait(Hooks.getWebdriver(), Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(CheckoutElements.paymentFinalStatus));
+        //WebElement paymentConsumerMessage = Hooks.getWebdriver().findElement(CheckoutElements.paymentConsumerMessage);
+        WebElement pageLoading = Hooks.getWebdriver().findElement(CheckoutElements.pageLoading);
+
+
+        wait.until( ExpectedConditions.invisibilityOf(pageLoading));
+
+        wait.until(ExpectedConditions.visibilityOf(paymentFinalStatus));
+
+        Assert.assertTrue(paymentFinalStatus.getText().contains("recusado"));
+        //Assert.assertEquals(paymentConsumerMessage.getText(), returnMessage);
+
+
+
     }
 }
