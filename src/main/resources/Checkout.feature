@@ -22,4 +22,10 @@ Feature: Payment Link
     Examples:
       | returnMessage                              | installments | cardNumber         | cardName     |
       | "Transação não aprovada. Tente novamente." | "1"          | "5155901222270002" | "John Smith" |
+      #| "Transação não aprovada. Tente novamente." | "1"          | "5155901222260003" | "John Smith" |
+      #| "Transação não aprovada. Tente novamente." | "1"          | "5155901222250004" | "John Smith" |
+      #| "Transação não aprovada. Tente novamente." | "1"          | "5155901222240005" | "John Smith" |
+      #| "Transação não aprovada. Tente novamente." | "1"          | "5155901222230006" | "John Smith" |
+      #| "Transação não aprovada. Tente novamente." | "1"          | "5155901222220007" | "John Smith" |
+      #| "Transação não aprovada. Tente novamente." | "1"          | "5155901222210008" | "John Smith" |
 

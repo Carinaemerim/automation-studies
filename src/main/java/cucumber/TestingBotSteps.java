@@ -17,40 +17,40 @@ public class TestingBotSteps {
 
     @Given("the 'Testing Bot' application was accessed")
         public void applicationWasAccessed() {
-        Hooks.getWebdriver().get(TestingBotApplicationElements.getBaseURL());
+        Hooks.getWebDriver().get(TestingBotApplicationElements.getBaseURL());
     }
 
     @When("the page loads")
     public void thePageLoads() {
-        WebDriverWait wait = new WebDriverWait(Hooks.getWebdriver(), Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(Hooks.getWebDriver(), Duration.ofSeconds(15));
         wait.until(ExpectedConditions.visibilityOfElementLocated(TestingBotApplicationElements.pageHeader));
     }
 
     @Then("the homepage should be displayed")
     public void theHomepageShouldBeDisplayed() {
-        WebElement header = Hooks.getWebdriver().findElement(TestingBotApplicationElements.pageHeader);
+        WebElement header = Hooks.getWebDriver().findElement(TestingBotApplicationElements.pageHeader);
 
         Assert.assertTrue(header.isDisplayed());
     }
 
     @And("the Trial button is displayed")
     public void theTrialButtonIsDisplayed() {
-        WebElement button = Hooks.getWebdriver().findElement(TestingBotApplicationElements.pageHeader);
+        WebElement button = Hooks.getWebDriver().findElement(TestingBotApplicationElements.pageHeader);
         Assert.assertTrue(button.getText().contains(TestingBotApplicationElements.trialButtonText));
 
     }
 
     @When("the consumer clicks on it")
     public void theConsumerClicksOnIt() {
-        WebElement button = Hooks.getWebdriver().findElement(TestingBotApplicationElements.pageHeader);
+        WebElement button = Hooks.getWebDriver().findElement(TestingBotApplicationElements.pageHeader);
         button.click();
-        WebDriverWait wait = new WebDriverWait(Hooks.getWebdriver(), Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(Hooks.getWebDriver(), Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOfElementLocated(TestingBotApplicationElements.companyNameInputField));
     }
 
     @Then("the Trial form page should be displayed")
     public void theTrialFormPageShouldBeDisplayed() {
-        WebElement form = Hooks.getWebdriver().findElement(TestingBotApplicationElements.trialPageForm);
+        WebElement form = Hooks.getWebDriver().findElement(TestingBotApplicationElements.trialPageForm);
         Assert.assertTrue(form.isDisplayed());
     }
 }
