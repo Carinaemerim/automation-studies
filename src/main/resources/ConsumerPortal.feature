@@ -24,5 +24,5 @@ Feature: Consumer Portal
     Then the CP HomePage should be displayed
 
     Examples:
-      | username     | password   | bankAccount             | bankName    |
-      | "John Smith" | "password" | "Demo Checking Account" | "Demo Bank" |
+      | username     | password   | bankName    |
+      | "John Smith" | "password" | "Demo Bank" |

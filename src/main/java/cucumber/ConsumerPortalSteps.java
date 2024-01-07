@@ -86,10 +86,12 @@ public class ConsumerPortalSteps {
     @When("the button Agree and Sign In is clicked")
     public void theButtonAgreeAndSignInIsClicked() throws InterruptedException {
         Hooks.getWebDriver().findElement(ConsumerPortalElements.submitFormButton).click();
+        Thread.sleep(4000);
     }
 
     @Then("the CP HomePage should be displayed")
     public void theCPHomePageShouldBeDisplayed() {
+        Hooks.getWebDriver().switchTo().defaultContent();
         Hooks.getWaitWebDriver().until(ExpectedConditions.visibilityOfElementLocated(ConsumerPortalElements.ConsumerPortalHomeWelcome));
         WebElement ConsumerPortalWelcome = Hooks.getWebDriver().findElement(ConsumerPortalElements.ConsumerPortalHomeWelcome);
 
