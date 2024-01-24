@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 public class ConsumerPortalElements {
 
     //public final static String baseURL = "https://my.uat.trustly.one/login";
-    public final static String baseURL = "http://localhost:16000/login";
+    public final static String baseURL = "https://my-dev-195781.int.trustly.one/login";
     public final static By passKeyButton = By.xpath("//*[@id=\"root\"]/div/div/button[1]");
     public final static By lightboxIframe = By.id("paywithmybank-iframe");
     public final static By lightboxSearch = By.id("lbx-listBank-inputSearch");
