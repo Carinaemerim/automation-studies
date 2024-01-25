@@ -1,7 +1,6 @@
 package studies.example.elements.demoqa;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 public class ElementsDemoQATextBox {
     public final static String baseURL = "https://demoqa.com/";
@@ -12,4 +11,6 @@ public class ElementsDemoQATextBox {
     public final static By currentAddress = By.id("currentAddress");
     public final static By permanentAddress = By.id("permanentAddress");
     public final static By submitButtonForm = By.id("submit");
+    public final static  By nameConfirmation = By.id("name");
+    public final static  By emailConfirmation = By.id("email");
 }
