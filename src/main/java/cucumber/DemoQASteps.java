@@ -9,8 +9,12 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import studies.example.elements.demoqa.ElementsDemoQARadioButton;
 import studies.example.elements.demoqa.ElementsDemoQATextBox;
 import studies.example.elements.demoqa.ElementsDemoQAcheckBox;
+
+import java.util.Locale;
+import java.util.Objects;
 
 public class DemoQASteps {
 
@@ -96,12 +100,13 @@ public class DemoQASteps {
 
     }
 
-    @And("a confirmation message is displayed")
-    public void aConfirmationMessageIsDisplayed() {
+    @And("a confirmation message {string} is displayed")
+    @Then("a confirmation {string} message should be displayed")
+    public void aConfirmationMessageIsDisplayed(String message) {
         WebElement notesConfirmationMessage = Hooks.getWebDriver().findElement(ElementsDemoQAcheckBox.notesConfirmationMessage);
 
         Hooks.getWaitWebDriver().until(ExpectedConditions.visibilityOf(notesConfirmationMessage));
-        Assert.assertTrue(notesConfirmationMessage.getText().contains("notes"));
+        Assert.assertTrue(notesConfirmationMessage.getText().contains(message));
     }
 
     @And("the Check Box item is unchecked")
@@ -112,5 +117,47 @@ public class DemoQASteps {
     @Then("the confirmation message should not be displayed anymore")
     public void theConfirmationMessageShouldNotBeDisplayedAnymore() {
         Assert.assertTrue(Hooks.getWebDriver().findElements(ElementsDemoQAcheckBox.notesConfirmationMessage).isEmpty());
+    }
+
+    @And("the Check Box Commands is checked")
+    public void theCheckBoxCommandsIsChecked() {
+        Hooks.getWaitWebDriver().until(ExpectedConditions.visibilityOfElementLocated(ElementsDemoQAcheckBox.checkboxCommands));
+        Hooks.getWebDriver().findElement(ElementsDemoQAcheckBox.checkboxCommands).click();
+    }
+
+    @And("the Radio Button item was clicked")
+    public void theRadioButtonItemWasClicked() {
+        Hooks.getWaitWebDriver().until(ExpectedConditions.visibilityOfElementLocated(ElementsDemoQARadioButton.radioButtonItem));
+        Hooks.getWebDriver().findElement(ElementsDemoQARadioButton.radioButtonItem).click();
+    }
+
+    @When("the {string} option is clicked")
+    public void theRadioOptionIsClicked(String radio) throws InterruptedException {
+        Hooks.getWaitWebDriver().until(ExpectedConditions.visibilityOfElementLocated(ElementsDemoQARadioButton.radioButtonYes));
+        //Hooks.getWebDriver().findElement(ElementsDemoQARadioButton.radioButtonYes).click();
+
+        WebElement radioText = null;
+
+        if (Objects.equals(radio, "Yes")){
+           radioText = Hooks.getWebDriver().findElement(ElementsDemoQARadioButton.radioButtonYes);
+        } else {
+            radioText = Hooks.getWebDriver().findElement(ElementsDemoQARadioButton.radioButtonImpressive);
+        }
+        radioText.click();
+    }
+
+    @Then("a radio selection confirmation {string} message should be displayed")
+    public void aRadioSelectionConfirmationMessageMessageShouldBeDisplayed(String message) {
+        WebElement radioButtonConfirmationMessage = Hooks.getWebDriver().findElement(ElementsDemoQARadioButton.radioButtonConfirmationMessage);
+
+        Hooks.getWaitWebDriver().until(ExpectedConditions.visibilityOf(radioButtonConfirmationMessage));
+        Assert.assertTrue(radioButtonConfirmationMessage.getText().contains(message));
+    }
+
+    @Then("the radio button should not be clickable")
+    public void theRadioButtonShouldNotBeClickable() {
+        WebElement radioButtonDisabled = Hooks.getWebDriver().findElement(ElementsDemoQARadioButton.radioButtonNo);
+
+        Assert.assertFalse(radioButtonDisabled.isEnabled());
     }
 }

@@ -10,5 +10,6 @@ public class ElementsDemoQAcheckBox {
     public final static By checkboxHomeArrow = By.xpath("//*[@id=\"tree-node\"]/ol/li/span/button");
     public final static By checkboxDesktopArrow = By.xpath("//*[@id=\"tree-node\"]/ol/li/ol/li[1]/span/button");
     public final static By checkboxNotes = By.xpath("//*[@id=\"tree-node\"]/ol/li/ol/li[1]/ol/li[1]/span/label");
-    public final static By notesConfirmationMessage = By.xpath("//*[@id=\"result\"]/span[2]");
+    public final static By notesConfirmationMessage = By.xpath("//*[@id=\"result\"]");
+    public final static By checkboxCommands = By.xpath("//*[@id=\"tree-node\"]/ol/li/ol/li[1]/ol/li[2]/span/label");
 }
