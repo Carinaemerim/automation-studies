@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import studies.example.elements.demoqa.ElementsDemoQARadioButton;
+import studies.example.elements.demoqa.ElementsDemoQATable;
 import studies.example.elements.demoqa.ElementsDemoQATextBox;
 import studies.example.elements.demoqa.ElementsDemoQAcheckBox;
 
@@ -159,5 +160,78 @@ public class DemoQASteps {
         WebElement radioButtonDisabled = Hooks.getWebDriver().findElement(ElementsDemoQARadioButton.radioButtonNo);
 
         Assert.assertFalse(radioButtonDisabled.isEnabled());
+    }
+
+    @And("the Web Tables item was clicked")
+    public void theWebTablesItemWasClicked() {
+        Hooks.getWaitWebDriver().until(ExpectedConditions.visibilityOfElementLocated(ElementsDemoQATable.webTableItem));
+        Hooks.getWebDriver().findElement(ElementsDemoQATable.webTableItem).click();
+    }
+
+    @When("the Add button is clicked")
+    public void theAddButtonIsClicked() {
+        Hooks.getWaitWebDriver().until(ExpectedConditions.visibilityOfElementLocated(ElementsDemoQATable.addNewTableEntry()));
+        Hooks.getWebDriver().findElement(ElementsDemoQATable.addNewTableEntry()).click();
+    }
+
+    @And("First Name field is filled with {string}")
+    public void firstNameFieldIsFilledWith(String arg0) {
+        Hooks.getWaitWebDriver().until(ExpectedConditions.elementToBeClickable(ElementsDemoQATable.firstNameInput));
+        WebElement firstNameInput = Hooks.getWebDriver().findElement(ElementsDemoQATable.firstNameInput);
+
+        firstNameInput.sendKeys("Sebastian");
+    }
+
+    @And("Last Name field is filled with {string}")
+    public void lastNameFieldIsFilledWith(String arg0) {
+        WebElement lastNameInput = Hooks.getWebDriver().findElement(ElementsDemoQATable.lastNameInput);
+
+        lastNameInput.sendKeys("Alucard");
+    }
+
+    @And("Email field is filled with {string}")
+    public void emailFieldIsFilledWith(String arg0) {
+        WebElement userEmailInput = Hooks.getWebDriver().findElement(ElementsDemoQATable.userEmailInput);
+
+        userEmailInput.sendKeys("sebastian@examples.com");
+    }
+
+    @And("Age field is filled with {string}")
+    public void ageFieldIsFilledWith(String arg0) {
+        WebElement ageInput = Hooks.getWebDriver().findElement(ElementsDemoQATable.ageInput);
+
+        ageInput.sendKeys("234");
+    }
+
+    @And("Salary field is filled with {string}")
+    public void salaryFieldIsFilledWith(String arg0) {
+        WebElement salaryInput = Hooks.getWebDriver().findElement(ElementsDemoQATable.salaryInput);
+
+        salaryInput.sendKeys("100000");
+    }
+
+    @And("Department field is filled with {string}")
+    public void departmentFieldIsFilledWith(String arg0) {
+        WebElement departmentInput = Hooks.getWebDriver().findElement(ElementsDemoQATable.departmentInput);
+
+        departmentInput.sendKeys("Legal");
+    }
+
+    @And("Registration Submit button is clicked")
+    public void registrationSubmitButtonIsClicked() {
+        Hooks.getWebDriver().findElement(ElementsDemoQATable.submitButtonTable).click();
+    }
+
+    @Then("a new row with the added info should be created on the table")
+    public void aNewRowWithTheAddedInfoShouldBeCreatedOnTheTable() {
+        Assert.assertTrue(Hooks.getWebDriver().findElement(ElementsDemoQATable.table).getText().contains("Sebastian"));
+        Assert.assertTrue(Hooks.getWebDriver().findElement(ElementsDemoQATable.table).getText().contains("Alucard"));
+
+    }
+
+    @Then("empty fields should display an error mark")
+    public void emptyFieldsShouldDisplayAnErrorMark() {
+        WebElement inputInvalidAttribute = Hooks.getWebDriver().findElement(ElementsDemoQATable.firstNameInput);
+        Assert.assertNotEquals(inputInvalidAttribute.getAttribute("validationMessage"), "");
     }
 }
