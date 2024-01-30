@@ -5,6 +5,7 @@ import io.cucumber.java.Before;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -27,6 +28,11 @@ public class Hooks {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         javascriptExecutor = (JavascriptExecutor) driver;
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--headless");
     }
 
     @After

@@ -1,5 +1,6 @@
 Feature: DemoQA tests
 
+  @regression
   Scenario Outline: Verify that it is possible to send data on the TextBox Element
     Given DemoQA application was accessed
     And Elements menu was clicked
@@ -15,6 +16,7 @@ Feature: DemoQA tests
     | fullName          | email                        | currentAddress                        | permanentAddress                      |
     | "Joana Guimarães" | "joanaguimaraes@example.com" | "Rua Porto Alegre, 300, Araranguá SC" | "Rua Porto Alegre, 300, Araranguá SC" |
 
+  @regression
   Scenario Outline: Verify that it is possible to interact on checkbox Element
     Given DemoQA application was accessed
     And Elements menu was clicked
@@ -30,6 +32,7 @@ Feature: DemoQA tests
     | message |
     | "notes" |
 
+  @regression
   Scenario Outline: Verify that it is possible to interact on two checkbox Elements
     Given DemoQA application was accessed
     And Elements menu was clicked
@@ -45,6 +48,7 @@ Feature: DemoQA tests
     | message    | message    |
     | "commands" | "notes"    |
 
+  @regression
   Scenario Outline: Verify that it is possible to select the radio button
     Given DemoQA application was accessed
     And Elements menu was clicked
@@ -57,6 +61,7 @@ Feature: DemoQA tests
     | "Yes"        | "Yes"        |
     | "Impressive" | "Impressive" |
 
+  @regression
   Scenario Outline: Verify that it is not possible to select a disabled radio button
     Given DemoQA application was accessed
     And Elements menu was clicked
@@ -68,6 +73,7 @@ Feature: DemoQA tests
     | radio |
     | "No"  |
 
+  @regression
   Scenario: Verify that it is possible to create a new row on the table
     Given DemoQA application was accessed
     And Elements menu was clicked
@@ -82,6 +88,7 @@ Feature: DemoQA tests
     And Registration Submit button is clicked
     Then a new row with the added info should be created on the table
 
+  @regression
   Scenario: Verify that a blank field on create new row, triggers an error on screen
     Given DemoQA application was accessed
     And Elements menu was clicked
@@ -90,6 +97,7 @@ Feature: DemoQA tests
     And Registration Submit button is clicked
     Then empty fields should display an error mark
 
+  @regression
   Scenario: Verify that it is possible to search for a term on the table
     Given DemoQA application was accessed
     And Elements menu was clicked
