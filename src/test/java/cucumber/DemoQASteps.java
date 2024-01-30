@@ -234,4 +234,23 @@ public class DemoQASteps {
         WebElement inputInvalidAttribute = Hooks.getWebDriver().findElement(ElementsDemoQATable.firstNameInput);
         Assert.assertNotEquals(inputInvalidAttribute.getAttribute("validationMessage"), "");
     }
+
+    @When("the search field is clicked")
+    public void theSearchFieldIsClicked() {
+        Hooks.getWaitWebDriver().until(ExpectedConditions.elementToBeClickable(ElementsDemoQATable.searchBox));
+        WebElement searchBox = Hooks.getWebDriver().findElement(ElementsDemoQATable.searchBox);
+
+        searchBox.click();
+    }
+
+    @And("the term {string} is typed")
+    public void theTermIsTyped(String arg0) {
+        WebElement searchBox = Hooks.getWebDriver().findElement(ElementsDemoQATable.searchBox);
+        searchBox.sendKeys("Alden");
+    }
+
+    @Then("the correspondent result should be displayed on the Table")
+    public void theCorrespondentResultShouldBeDisplayedOnTheTable() {
+        
+    }
 }

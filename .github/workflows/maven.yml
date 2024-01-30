@@ -25,3 +25,13 @@ jobs:
      
     - name: Build with Maven
       run: mvn -B clean test
+
+    - uses: nanasess/setup-chromedriver@v2
+
+    - run: |
+        export DISPLAY=:99
+        chromedriver --url-base=/wd/hub
+
+    - run: mvn test
+      env:
+        CHROMEDRIVER: ${{ github.workspace }}/chromedriver

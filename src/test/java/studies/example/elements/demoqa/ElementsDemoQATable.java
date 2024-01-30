@@ -17,6 +17,6 @@ public class ElementsDemoQATable {
     public static final By departmentInput = By.id("department");
     public static final By submitButtonTable = By.xpath("//*[@id=\"submit\"]");
     public static final By table = By.xpath("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[2]/div[3]/div[1]/div[2]");
-
+    public static final By searchBox = By.id("searchBox");
 
 }
