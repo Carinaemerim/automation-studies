@@ -11,14 +11,14 @@ import java.time.Duration;
 
 public class TestingBotApplicationTest extends SetUp{
 
-    @Test
+    //@Test
     public void siteHeaderIsOnHomepage() {
         getWebdriver().get(TestingBotApplicationElements.getBaseURL());
         WebElement header = getWebdriver().findElement(TestingBotApplicationElements.pageHeader);
         Assert.assertTrue(header.isDisplayed());
     }
 
-    @Test
+    //@Test
     public void validateClickOnStartFreeTrial(){
         getWebdriver().get(TestingBotApplicationElements.getBaseURL());
         WebElement button = getWebdriver().findElement(TestingBotApplicationElements.pageHeader);

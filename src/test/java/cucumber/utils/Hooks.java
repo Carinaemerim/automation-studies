@@ -18,13 +18,7 @@ public class Hooks {
 
     @Before
     public static void startDriver(){
-        String chromedriver = System.getenv("CHROMEDRIVER");
-
-        if (chromedriver == null || chromedriver.isEmpty()) {
-            chromedriver = "c:/Users/carinaleal/WebDrivers/chromedriver";
-        }
-
-        System.setProperty("webdriver.chromedriver", chromedriver);
+        System.setProperty("webdriver.chromedriver", "c:/Users/carinaleal/WebDrivers/chromedriver");
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         javascriptExecutor = (JavascriptExecutor) driver;
@@ -33,6 +27,7 @@ public class Hooks {
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--headless");
+        //driver = new ChromeDriver(options);
     }
 
     @After

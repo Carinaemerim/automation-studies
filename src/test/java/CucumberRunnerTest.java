@@ -1,6 +1,7 @@
-import io.cucumber.junit.platform.engine.Cucumber;
+import org.junit.runner.RunWith;
+import io.cucumber.junit.Cucumber;
 
-@Cucumber
+@RunWith(Cucumber.class)
 public class CucumberRunnerTest {
 
 }

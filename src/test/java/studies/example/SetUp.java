@@ -1,13 +1,9 @@
 package studies.example;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-
-import java.sql.Driver;
 
 public class SetUp {
     private WebDriver driver;
