@@ -8,13 +8,13 @@ import org.testng.annotations.BeforeTest;
 public class SetUp {
     private WebDriver driver;
 
-    @BeforeTest
+    //@BeforeTest
     public void startDriver(){
         System.setProperty("webdriver.chromedriver", "c:/Users/carinaleal/WebDrivers/chromedriver");
         driver = new ChromeDriver();
     }
 
-    @AfterTest
+    //@AfterTest
     public void closeDriver(){
         driver.close();
     }
