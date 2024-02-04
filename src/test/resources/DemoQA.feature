@@ -112,7 +112,7 @@ Feature: DemoQA tests
     And the Web Tables item was clicked
     When edit button is clicked on the first table row
     And the Last Name field is changed to Stuart
-    And the Registration Submit button is cicked
+    And the Registration Submit button is clicked
     Then the first row last name should be displayed as "Stuart"
 
   Scenario: Verify that it is possible to delete a line of the table

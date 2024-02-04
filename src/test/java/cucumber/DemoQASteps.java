@@ -251,6 +251,34 @@ public class DemoQASteps {
 
     @Then("the correspondent result should be displayed on the Table")
     public void theCorrespondentResultShouldBeDisplayedOnTheTable() {
-        
+        WebElement tableContent = Hooks.getWebDriver().findElement(ElementsDemoQATable.tablecontent);
+        Assert.assertTrue(tableContent.getText().contains("Alden"));
+        Assert.assertNotEquals("Cierra", tableContent.getText());
+    }
+
+    @When("edit button is clicked on the first table row")
+    public void editButtonIsClickedOnTheFirstTableRow() {
+        Hooks.getWebDriver().findElement(ElementsDemoQATable.editRowButton).click();
+
+    }
+
+    @And("the Last Name field is changed to Stuart")
+    public void theLastNameFieldIsChangedToStuart() {
+        Hooks.getWaitWebDriver().until(ExpectedConditions.elementToBeClickable(ElementsDemoQATable.registrationModalLastName));
+        WebElement lastName = Hooks.getWebDriver().findElement(ElementsDemoQATable.lastNameInput);
+        lastName.clear();
+        lastName.sendKeys("Stuart");
+
+    }
+
+    @And("the Registration Submit button is clicked")
+    public void theRegistrationSubmitButtonIsClicked() {
+        Hooks.getWebDriver().findElement(ElementsDemoQATable.submitButtonTable).click();
+    }
+
+    @Then("the first row last name should be displayed as {string}")
+    public void theFirstRowLastNameShouldBeDisplayedAs(String arg0) {
+        Hooks.getWaitWebDriver().until(ExpectedConditions.visibilityOf(Hooks.getWebDriver().findElement(ElementsDemoQATable.table)));
+        Assert.assertTrue(Hooks.getWebDriver().findElement(ElementsDemoQATable.lastNameFirstRow).getText().contains("Stuart"));
     }
 }
