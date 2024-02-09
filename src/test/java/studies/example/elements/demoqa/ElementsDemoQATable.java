@@ -22,5 +22,10 @@ public class ElementsDemoQATable {
     public static final By editRowButton = By.id("edit-record-1");
     public static final By registrationModalLastName = By.id("lastName");
     public static final By lastNameFirstRow = By.xpath("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[2]/div[3]/div[1]/div[2]/div[1]/div/div[2]");
-
+    public static final By firstRowDeleteButton = By.id("delete-record-1");
+    public static final By paginationDropdown = By.xpath("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[2]/div[3]/div[2]/div/div[2]/span[2]/select");
+    public static final By tableRows = By.cssSelector(".rt-table .rt-tbody .rt-tr-group");
+    public static final By previousButton = By.xpath("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[2]/div[3]/div[2]/div/div[1]/button");
+    public static final By nextButton = By.xpath("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[2]/div[3]/div[2]/div/div[3]/button");
+    public static final By paginationNumber = By.xpath("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[2]/div[3]/div[2]/div/div[2]/span[1]/div/input");
 }

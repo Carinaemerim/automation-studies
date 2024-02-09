@@ -9,11 +9,13 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import studies.example.elements.demoqa.ElementsDemoQARadioButton;
 import studies.example.elements.demoqa.ElementsDemoQATable;
 import studies.example.elements.demoqa.ElementsDemoQATextBox;
 import studies.example.elements.demoqa.ElementsDemoQAcheckBox;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -49,12 +51,12 @@ public class DemoQASteps {
 
     @And("the address {string} was typed on the Current Address field")
     public void theAddressCurrentAddressWasTypedOnTheCurrentAddressField(String currentAddress) {
-        Hooks.getWebDriver().findElement(ElementsDemoQATextBox.currentAddress).sendKeys( currentAddress);
+        Hooks.getWebDriver().findElement(ElementsDemoQATextBox.currentAddress).sendKeys(currentAddress);
     }
 
     @And("the address {string} was typed on the Permanent Address field")
     public void theAddressPermanentAddressWasTypedOnThePermanentAddressField(String permanentAddress) {
-        Hooks.getWebDriver().findElement(ElementsDemoQATextBox.permanentAddress).sendKeys( permanentAddress);
+        Hooks.getWebDriver().findElement(ElementsDemoQATextBox.permanentAddress).sendKeys(permanentAddress);
 
     }
 
@@ -281,4 +283,74 @@ public class DemoQASteps {
         Hooks.getWaitWebDriver().until(ExpectedConditions.visibilityOf(Hooks.getWebDriver().findElement(ElementsDemoQATable.table)));
         Assert.assertTrue(Hooks.getWebDriver().findElement(ElementsDemoQATable.lastNameFirstRow).getText().contains("Stuart"));
     }
+
+    @When("Delete button is clicked on the first table row")
+    public void deleteButtonIsClickedOnTheFirstTableRow() {
+        Hooks.getWebDriver().findElement(ElementsDemoQATable.firstRowDeleteButton).click();
+
+    }
+
+    @Then("the deleted row should not be displayed on the table")
+    public void theDeletedRowShouldNotBeDisplayedOnTheTable() {
+        Assert.assertFalse(Hooks.getWebDriver().findElement(ElementsDemoQATable.table).getText().contains("Cierra"));
+    }
+
+    @When("the {string} option on table pagination dropdown is selected")
+    public void theOptionOnTablePaginationDropdownIsSelected(String arg0) {
+        Select paginationDropdown = new Select(Hooks.getWebDriver().findElement(ElementsDemoQATable.paginationDropdown));
+        paginationDropdown.selectByVisibleText("5 rows");
+
+    }
+
+    @Then("{int} rows should be displayed on the Table")
+    public void rowsShouldBeDisplayedOnTheTable(int arg0) {
+        List<WebElement> tableRows = Hooks.getWebDriver().findElements(ElementsDemoQATable.tableRows);
+        int count = tableRows.size();
+
+        Assert.assertEquals(5, count);
+    }
+
+    @And("a new row is created on the table")
+    public void aNewRowIsCreatedOnTheTable() {
+        Hooks.getWaitWebDriver().until(ExpectedConditions.visibilityOfElementLocated(ElementsDemoQATable.addNewTableEntry()));
+        Hooks.getWebDriver().findElement(ElementsDemoQATable.addNewTableEntry()).click();
+
+        Hooks.getWaitWebDriver().until(ExpectedConditions.elementToBeClickable(ElementsDemoQATable.firstNameInput));
+        WebElement firstNameInput = Hooks.getWebDriver().findElement(ElementsDemoQATable.firstNameInput);
+        WebElement lastNameInput = Hooks.getWebDriver().findElement(ElementsDemoQATable.lastNameInput);
+        WebElement userEmailInput = Hooks.getWebDriver().findElement(ElementsDemoQATable.userEmailInput);
+        WebElement ageInput = Hooks.getWebDriver().findElement(ElementsDemoQATable.ageInput);
+        WebElement salaryInput = Hooks.getWebDriver().findElement(ElementsDemoQATable.salaryInput);
+        WebElement departmentInput = Hooks.getWebDriver().findElement(ElementsDemoQATable.departmentInput);
+
+        firstNameInput.sendKeys("Sebastian");
+        lastNameInput.sendKeys("Alucard");
+        userEmailInput.sendKeys("sebastian@examples.com");
+        ageInput.sendKeys("234");
+        salaryInput.sendKeys("100000");
+        departmentInput.sendKeys("Legal");
+
+        Hooks.getWebDriver().findElement(ElementsDemoQATable.submitButtonTable).click();
+    }
+
+    @And("the Previous button is disabled")
+    public void thePreviousButtonIsDisabled() {
+        WebElement previousButton = Hooks.getWebDriver().findElement(ElementsDemoQATable.previousButton);
+        Assert.assertFalse(previousButton.isEnabled());
+    }
+
+    @When("the Next button is clicked")
+    public void theNextButtonIsClicked() {
+        WebElement nextButton = Hooks.getWebDriver().findElement(ElementsDemoQATable.nextButton);
+        nextButton.click();
+    }
+
+    @Then("the second page of the Table should be displayed")
+    public void theSecondPageOfTheTableShouldBeDisplayed() {
+        Hooks.getWaitWebDriver().until(ExpectedConditions.visibilityOfElementLocated(ElementsDemoQATable.addNewTableEntry()));
+        WebElement paginationNumber = Hooks.getWebDriver().findElement(ElementsDemoQATable.paginationNumber);
+        Assert.assertEquals( "2", paginationNumber.getAttribute("value"));
+
+    }
+
 }

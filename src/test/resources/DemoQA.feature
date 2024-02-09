@@ -132,7 +132,10 @@ Feature: DemoQA tests
   Scenario: Verify that it is possible to navigate to the second table page
     Given DemoQA application was accessed
     And Elements menu was clicked
-    And the Web Tables has more than 5 Rows
+    And the Web Tables item was clicked
+    And a new row is created on the table
+    And a new row is created on the table
+    And a new row is created on the table
     And the "5 rows" option on table pagination dropdown is selected
     And the Previous button is disabled
     When the Next button is clicked
